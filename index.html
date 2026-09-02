@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Silverhawk LearnDatabase - Belajar database gratisan modern: Firebase, Supabase, MongoDB Atlas, PlanetScale, dan lainnya. Siap deploy ke GitHub Pages." />
+  <title>Silverhawk LearnDatabase | Belajar Database Gratisan</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loader">
+      <div class="loader-ring"></div>
+      <span>Silverhawk LearnDatabase</span>
+    </div>
+  </div>
+
+  <!-- Voucher Gate Modal -->
+  <div id="voucher-gate" class="modal-overlay active">
+    <div class="modal voucher-modal">
+      <div class="modal-header">
+        <img src="assets/logo.svg" alt="Silverhawk" class="logo-small" onerror="this.style.display='none'" />
+        <h2>🔒 Akses LearnDatabase</h2>
+        <p>Masukkan kode voucher untuk membuka materi lengkap</p>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <label for="voucher-input">Kode Voucher</label>
+          <input type="text" id="voucher-input" placeholder="Contoh: XXXX-XXXX" autocomplete="off" />
+        </div>
+        <button id="btn-unlock" class="btn btn-primary btn-block">
+          <i class="fas fa-unlock"></i> Buka Akses
+        </button>
+        <div id="voucher-msg" class="msg"></div>
+        <div class="divider"><span>atau</span></div>
+        <div class="payment-info">
+          <h4><i class="fas fa-ticket-alt"></i> Beli Voucher</h4>
+          <p>Transfer ke salah satu metode berikut, lalu kirim bukti ke admin untuk mendapatkan kode voucher.</p>
+          <div class="payment-cards">
+            <div class="pay-card">
+              <i class="fas fa-wallet"></i>
+              <div>
+                <strong>DANA</strong>
+                <span>+62 851-5992-2358</span>
+              </div>
+            </div>
+            <div class="pay-card">
+              <i class="fas fa-mobile-alt"></i>
+              <div>
+                <strong>GoPay</strong>
+                <span>+62 851-5882-2803</span>
+              </div>
+            </div>
+          </div>
+          <p class="hint">Setelah transfer, hubungi admin via WhatsApp untuk aktivasi voucher.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="https://silverhawk.web.id" target="_blank" class="link-back">
+          <i class="fas fa-arrow-left"></i> Kembali ke Silverhawk.web.id
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App (hidden until unlocked) -->
+  <div id="app" class="app hidden">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <a href="#home" class="brand">
+          <span class="brand-icon">🦅</span>
+          <span class="brand-text">Silverhawk <small>LearnDatabase</small></span>
+        </a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link active">Beranda</a></li>
+        <li><a href="#materi" class="nav-link">Materi</a></li>
+        <li><a href="#simulasi" class="nav-link">Simulasi</a></li>
+        <li><a href="#deploy" class="nav-link">Deploy</a></li>
+        <li><a href="#playground" class="nav-link">Playground</a></li>
+        <li><a href="#admin" class="nav-link admin-link" id="admin-nav">Admin</a></li>
+        <li>
+          <button id="btn-logout" class="btn btn-ghost btn-sm">
+            <i class="fas fa-sign-out-alt"></i> Keluar
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="badge">Bagian dari silverhawk.web.id</span>
+          <h1>Belajar Database <span class="gradient-text">Gratisan</span><br />yang Siap Produksi</h1>
+          <p class="hero-desc">
+            Pelajari cara menggunakan Firebase, Supabase, MongoDB Atlas, PlanetScale, Neon, dan database gratis lainnya —
+            dari registrasi, implementasi, sampai deploy ke GitHub Pages.
+          </p>
+          <div class="hero-actions">
+            <a href="#materi" class="btn btn-primary btn-lg">
+              <i class="fas fa-book-open"></i> Mulai Belajar
+            </a>
+            <a href="#simulasi" class="btn btn-outline btn-lg">
+              <i class="fas fa-flask"></i> Coba Simulasi
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong id="stat-db">8+</strong>
+              <span>Database</span>
+            </div>
+            <div class="stat">
+              <strong id="stat-lesson">20+</strong>
+              <span>Materi</span>
+            </div>
+            <div class="stat">
+              <strong>100%</strong>
+              <span>Gratis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Materi Section -->
+    <section id="materi" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-graduation-cap"></i> Materi Pembelajaran</h2>
+          <p>Pilih database yang ingin kamu pelajari. Setiap materi mencakup perkenalan, registrasi, implementasi, dan deploy.</p>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">Semua</button>
+          <button class="filter-btn" data-filter="nosql">NoSQL</button>
+          <button class="filter-btn" data-filter="sql">SQL</button>
+          <button class="filter-btn" data-filter="baas">BaaS</button>
+        </div>
+        <div class="cards-grid" id="materi-grid">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail Modal for Materi -->
+    <div id="materi-modal" class="modal-overlay">
+      <div class="modal materi-modal">
+        <button class="modal-close" id="close-materi"><i class="fas fa-times"></i></button>
+        <div class="modal-body" id="materi-content">
+          <!-- Content injected -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Simulasi Section -->
+    <section id="simulasi" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-flask"></i> Simulasi Interaktif</h2>
+          <p>Coba konsep database tanpa perlu setup akun. Simulasi CRUD sederhana di browser.</p>
+        </div>
+        <div class="sim-tabs">
+          <button class="sim-tab active" data-sim="crud">CRUD Simulator</button>
+          <button class="sim-tab" data-sim="query">Query Builder</button>
+          <button class="sim-tab" data-sim="schema">Schema Designer</button>
+        </div>
+        <div class="sim-panel active" id="sim-crud">
+          <div class="sim-layout">
+            <div class="sim-controls">
+              <h3>Simulasi CRUD (LocalStorage)</h3>
+              <div class="form-group">
+                <label>Nama Item</label>
+                <input type="text" id="crud-name" placeholder="Contoh: Laptop" />
+              </div>
+              <div class="form-group">
+                <label>Harga / Nilai</label>
+                <input type="number" id="crud-value" placeholder="100000" />
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" id="crud-add"><i class="fas fa-plus"></i> Create</button>
+                <button class="btn btn-secondary" id="crud-clear"><i class="fas fa-trash"></i> Clear All</button>
+              </div>
+              <p class="hint">Data disimpan di localStorage browser kamu.</p>
+            </div>
+            <div class="sim-result">
+              <h4>Data Saat Ini</h4>
+              <div class="table-wrap">
+                <table id="crud-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nama</th>
+                      <th>Nilai</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sim-panel" id="sim-query">
+          <div class="sim-layout">
+            <div class="sim-controls">
+              <h3>Query Builder (Pseudo SQL)</h3>
+              <div class="form-group">
+                <label>Tabel</label>
+                <select id="qb-table">
+                  <option value="users">users</option>
+                  <option value="products">products</option>
+                  <option value="orders">orders</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Operasi</label>
+                <select id="qb-op">
+                  <option value="SELECT">SELECT</option>
+                  <option value="INSERT">INSERT</option>
+                  <option value="UPDATE">UPDATE</option>
+                  <option value="DELETE">DELETE</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Kondisi / Values (opsional)</label>
+                <input type="text" id="qb-where" placeholder="id = 1 / name='Budi'" />
+              </div>
+              <button class="btn btn-primary" id="qb-run"><i class="fas fa-play"></i> Generate Query</button>
+            </div>
+            <div class="sim-result">
+              <h4>Hasil Query</h4>
+              <pre id="qb-output" class="code-block">-- Query akan muncul di sini</pre>
+            </div>
+          </div>
+        </div>
+        <div class="sim-panel" id="sim-schema">
+          <div class="sim-layout">
+            <div class="sim-controls">
+              <h3>Schema Designer Sederhana</h3>
+              <div class="form-group">
+                <label>Nama Tabel</label>
+                <input type="text" id="schema-table" placeholder="users" />
+              </div>
+              <div class="form-group">
+                <label>Kolom (pisahkan dengan koma)</label>
+                <input type="text" id="schema-cols" placeholder="id INT PK, name VARCHAR(100), email VARCHAR(255)" />
+              </div>
+              <button class="btn btn-primary" id="schema-gen"><i class="fas fa-magic"></i> Generate CREATE TABLE</button>
+            </div>
+            <div class="sim-result">
+              <h4>SQL Schema</h4>
+              <pre id="schema-output" class="code-block">-- Schema akan muncul di sini</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deploy Guide -->
+    <section id="deploy" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-rocket"></i> Panduan Deploy ke GitHub Pages</h2>
+          <p>Langkah praktis menghubungkan database gratisan ke aplikasi static yang di-host di GitHub Pages.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h3>Pilih Database yang Cocok</h3>
+              <p>Untuk GitHub Pages (static site), pilih BaaS / serverless: <strong>Firebase, Supabase, MongoDB Atlas + Realm, atau Neon + API</strong>.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h3>Daftar & Buat Project</h3>
+              <p>Ikuti materi di bagian Materi untuk registrasi. Ambil API Key / URL / Anon Key.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h3>Integrasikan di Frontend</h3>
+              <p>Gunakan SDK JavaScript (Firebase JS, @supabase/supabase-js, dll). Jangan taruh secret key di frontend — gunakan only public/anon key + RLS/Rules.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h3>Push ke GitHub & Aktifkan Pages</h3>
+              <p>Push folder project ke repository, Settings → Pages → Source: Deploy from branch (main / docs).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h3>Uji & Monitor</h3>
+              <p>Buka URL GitHub Pages, uji CRUD, cek console browser, dan pantau usage di dashboard database.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tip-box">
+          <i class="fas fa-lightbulb"></i>
+          <div>
+            <strong>Tips Keamanan:</strong> Selalu aktifkan Row Level Security (Supabase) atau Security Rules (Firebase). Jangan pernah commit service account key atau secret ke repository publik.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Playground -->
+    <section id="playground" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-code"></i> Code Playground</h2>
+          <p>Contoh snippet siap pakai untuk berbagai database. Salin dan sesuaikan.</p>
+        </div>
+        <div class="playground-layout">
+          <div class="pg-sidebar">
+            <button class="pg-btn active" data-pg="firebase">Firebase</button>
+            <button class="pg-btn" data-pg="supabase">Supabase</button>
+            <button class="pg-btn" data-pg="mongodb">MongoDB Atlas</button>
+            <button class="pg-btn" data-pg="neon">Neon (Postgres)</button>
+          </div>
+          <div class="pg-code">
+            <div class="code-header">
+              <span id="pg-title">Firebase Firestore</span>
+              <button class="btn btn-sm btn-ghost" id="pg-copy"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <pre id="pg-content" class="code-block"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Section -->
+    <section id="admin" class="section hidden-section">
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fas fa-shield-alt"></i> Panel Admin</h2>
+          <p>Kelola voucher dan pengaturan situs.</p>
+        </div>
+        <div id="admin-login-box" class="admin-box">
+          <h3>Login Admin</h3>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="admin-pass" placeholder="Masukkan password admin" />
+          </div>
+          <button class="btn btn-primary" id="btn-admin-login">Masuk</button>
+          <div id="admin-login-msg" class="msg"></div>
+        </div>
+        <div id="admin-panel" class="admin-panel hidden">
+          <div class="admin-actions">
+            <button class="btn btn-primary" id="btn-gen-voucher"><i class="fas fa-plus"></i> Generate Voucher Baru</button>
+            <button class="btn btn-secondary" id="btn-export-vouchers"><i class="fas fa-download"></i> Export JSON</button>
+            <button class="btn btn-ghost" id="btn-admin-logout">Logout Admin</button>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prefix (opsional)</label>
+              <input type="text" id="v-prefix" placeholder="SH" maxlength="6" />
+            </div>
+            <div class="form-group">
+              <label>Kadaluarsa (hari dari sekarang, 0 = tidak kadaluarsa)</label>
+              <input type="number" id="v-expiry" value="30" min="0" />
+            </div>
+            <div class="form-group">
+              <label>Catatan</label>
+              <input type="text" id="v-note" placeholder="Pembeli via Dana" />
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="voucher-table">
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Dibuat</th>
+                  <th>Kadaluarsa</th>
+                  <th>Status</th>
+                  <th>Catatan</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h4>Silverhawk LearnDatabase</h4>
+            <p>Bagian dari <a href="https://silverhawk.web.id" target="_blank">silverhawk.web.id</a></p>
+          </div>
+          <div>
+            <h4>Pembayaran Voucher</h4>
+            <p>DANA: +62 851-5992-2358<br />GoPay: +62 851-5882-2803</p>
+          </div>
+          <div>
+            <h4>Navigasi</h4>
+            <a href="#home">Beranda</a>
+            <a href="#materi">Materi</a>
+            <a href="#simulasi">Simulasi</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Silverhawk. Dibuat untuk pembelajaran database gratisan.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
