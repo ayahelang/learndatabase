@@ -20,53 +20,68 @@
     </div>
   </div>
 
-  <!-- Voucher Gate Modal -->
-  <div id="voucher-gate" class="modal-overlay active">
-    <div class="modal voucher-modal">
-      <div class="modal-header">
-        <img src="assets/logo.svg" alt="Silverhawk" class="logo-small" onerror="this.style.display='none'" />
-        <h2>🔒 Akses LearnDatabase</h2>
-        <p>Masukkan kode voucher untuk membuka materi lengkap</p>
-      </div>
-      <div class="modal-body">
-        <div class="input-group">
-          <label for="voucher-input">Kode Voucher</label>
-          <input type="text" id="voucher-input" placeholder="Contoh: XXXX-XXXX" autocomplete="off" />
+  <!-- Voucher Gate - Full Screen Modern -->
+  <div id="voucher-gate" class="gate active">
+    <div class="gate-bg">
+      <div class="gate-orb gate-orb-1"></div>
+      <div class="gate-orb gate-orb-2"></div>
+      <div class="gate-grid"></div>
+    </div>
+
+    <div class="gate-content">
+      <!-- Left branding (desktop) -->
+      <div class="gate-brand">
+        <div class="gate-logo">🦅</div>
+        <h1>Silverhawk<br/><span>LearnDatabase</span></h1>
+        <p>Pelajari database gratisan modern — Firebase, Supabase, MongoDB Atlas, Neon & lainnya. Siap deploy ke GitHub Pages.</p>
+        <div class="gate-features">
+          <div class="gate-feat"><i class="fas fa-book"></i> 8+ Database</div>
+          <div class="gate-feat"><i class="fas fa-flask"></i> Simulasi Interaktif</div>
+          <div class="gate-feat"><i class="fas fa-code"></i> Code Playground</div>
         </div>
-        <button id="btn-unlock" class="btn btn-primary btn-block">
-          <i class="fas fa-unlock"></i> Buka Akses
-        </button>
-        <div id="voucher-msg" class="msg"></div>
-        <div class="divider"><span>atau</span></div>
-        <div class="payment-info">
-          <h4><i class="fas fa-ticket-alt"></i> Beli Voucher</h4>
-          <p>Transfer ke salah satu metode berikut, lalu kirim bukti ke admin untuk mendapatkan kode voucher.</p>
-          <div class="payment-cards">
-            <div class="pay-card">
-              <i class="fas fa-wallet"></i>
-              <div>
-                <strong>DANA</strong>
-                <span>+62 851-5992-2358</span>
-              </div>
+        <a href="https://silverhawk.web.id" target="_blank" class="gate-back">
+          <i class="fas fa-arrow-left"></i> silverhawk.web.id
+        </a>
+      </div>
+
+      <!-- Right form card -->
+      <div class="gate-card">
+        <div class="gate-card-header">
+          <div class="lock-icon"><i class="fas fa-shield-halved"></i></div>
+          <h2>Masukkan Voucher</h2>
+          <p>Akses materi lengkap dengan kode voucher kamu</p>
+        </div>
+
+        <div class="gate-form">
+          <div class="input-wrap">
+            <i class="fas fa-ticket"></i>
+            <input type="text" id="voucher-input" placeholder="Kode voucher" autocomplete="off" spellcheck="false" />
+          </div>
+          <button id="btn-unlock" class="btn btn-primary btn-block btn-lg">
+            <i class="fas fa-unlock"></i> Buka Akses
+          </button>
+          <div id="voucher-msg" class="msg"></div>
+        </div>
+
+        <div class="gate-divider"><span>Belum punya voucher?</span></div>
+
+        <div class="gate-pay">
+          <p class="gate-pay-title">Beli via transfer, lalu chat admin</p>
+          <div class="pay-row">
+            <div class="pay-item">
+              <span class="pay-label">DANA</span>
+              <span class="pay-num">+62 851-5992-2358</span>
             </div>
-            <div class="pay-card">
-              <i class="fas fa-mobile-alt"></i>
-              <div>
-                <strong>GoPay</strong>
-                <span>+62 851-5882-2803</span>
-              </div>
+            <div class="pay-item">
+              <span class="pay-label">GoPay</span>
+              <span class="pay-num">+62 851-5882-2803</span>
             </div>
           </div>
-          <p class="hint">Setelah transfer, hubungi admin via WhatsApp untuk aktivasi voucher.</p>
         </div>
-      </div>
-      <div class="modal-footer">
-        <a href="https://silverhawk.web.id" target="_blank" class="link-back">
-          <i class="fas fa-arrow-left"></i> Kembali ke Silverhawk.web.id
-        </a>
       </div>
     </div>
   </div>
+
 
   <!-- Main App (hidden until unlocked) -->
   <div id="app" class="app hidden">
